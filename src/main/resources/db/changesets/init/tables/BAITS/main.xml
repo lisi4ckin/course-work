@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+    <changeSet id="tables-BAITS-1" author="alisitsin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="BAITS"/>
+            </not>
+        </preConditions>
+        <sql>
+            create table baits (
+                                   bait_id bigint not null,
+                                   name varchar(255),
+                                   technic varchar(255),
+                                   type varchar(255),
+                                   primary key (bait_id)
+            );
+            alter table if exists bitings
+                add constraint FKt9pw75k1snryycw8dlkrwp23u
+                foreign key (bait_id)
+                references baits;
+            create sequence bait_id_seq start with 1000 increment by 1;
+        </sql>
+        <comment>create table BAITS</comment>
+    </changeSet>
+</databaseChangeLog>

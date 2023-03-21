@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+    <changeSet id="tables-FISHERMEN-1" author="alisitsin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="FISHERMEN"/>
+            </not>
+        </preConditions>
+        <sql>
+            create table fishermen (
+                                       fisherman_id bigint not null,
+                                       age integer,
+                                       experience integer,
+                                       full_name varchar(255),
+                                       primary key (fisherman_id)
+            );
+            alter table if exists preferences
+                add constraint FKmjkiix4h522erailo2mlaf4r8
+                foreign key (fisherman_id)
+                references fishermen;
+            alter table if exists distances
+                add constraint FKhfygk75ma8mbb60251p69mkl4
+                foreign key (fisherman_id)
+                references fishermen;
+
+            create sequence fisherman_id_seq start with 1000 increment by 1;
+        </sql>
+        <comment>create table FISHERMEN</comment>
+    </changeSet>
+</databaseChangeLog>

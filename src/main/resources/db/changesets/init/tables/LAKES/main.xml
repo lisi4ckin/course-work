@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+    <changeSet id="tables-LAKES-1" author="alisitsin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="LAKES"/>
+            </not>
+        </preConditions>
+        <sql>
+            create table lakes (
+                                   lake_id bigint not null,
+                                   depth bigint,
+                                   end_season_date varchar(255),
+                                   name varchar(255),
+                                   start_season_date varchar(255),
+                                   primary key (lake_id)
+            );
+            alter table if exists distances
+                add constraint FKfqao0b6xm8yqb2wjo9g8pl51p
+                foreign key (lake_id)
+                references lakes;
+            create sequence lake_id_seq start with 1000 increment by 1;
+        </sql>
+        <comment>create table LAKES</comment>
+    </changeSet>
+</databaseChangeLog>

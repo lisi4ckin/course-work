@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.15.xsd">
+    <changeSet id="tables-DISTANCES-1" author="alisitsin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="DISTANCES"/>
+            </not>
+        </preConditions>
+        <sql>
+            create table distances (
+                                       fisherman_id bigint not null,
+                                       lake_id bigint not null
+            );
+        </sql>
+        <comment>create table DISTANCES</comment>
+    </changeSet>
+</databaseChangeLog>
