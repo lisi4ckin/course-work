@@ -9,21 +9,34 @@
                 <tableExists tableName="LAKES"/>
             </not>
         </preConditions>
+        <createTable tableName="LAKES">
+            <column name="lake_id" type="bigint" remarks="Идентификатор озера (первичный ключ)">
+                <constraints primaryKey="true" primaryKeyName="PK_LAKE_ID" nullable="false"/>
+            </column>
+            <column name="depth" type="bigint" remarks="Глубина озера (в метрах)"/>
+            <column name="end_season_date" type="varchar(255)" remarks="Дата окончания сезона (месяц)"/>
+            <column name="start_season_date" type="varchar(255)" remarks="Дата начала сезона (месяц)"/>
+            <column name="name" type="varchar(255)" remarks="Название озера">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
         <sql>
-            create table lakes (
-                                   lake_id bigint not null,
-                                   depth bigint,
-                                   end_season_date varchar(255),
-                                   name varchar(255),
-                                   start_season_date varchar(255),
-                                   primary key (lake_id)
-            );
             alter table if exists distances
                 add constraint FKfqao0b6xm8yqb2wjo9g8pl51p
                 foreign key (lake_id)
                 references lakes;
-            create sequence lake_id_seq start with 1000 increment by 1;
         </sql>
         <comment>create table LAKES</comment>
+    </changeSet>
+
+    <changeSet id="add-lake_id_seq-1" author="dsmirnov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="LAKE_ID_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="LAKE_ID_SEQ" minValue="1000" maxValue="9223372036854775807"
+                        startValue="1000" incrementBy="1"/>
+        <comment>add lake seq</comment>
     </changeSet>
 </databaseChangeLog>

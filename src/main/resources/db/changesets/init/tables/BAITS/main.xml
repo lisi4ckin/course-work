@@ -9,20 +9,32 @@
                 <tableExists tableName="BAITS"/>
             </not>
         </preConditions>
+        <createTable tableName="BAITS">
+            <column name="bait_id" type="bigint" remarks="Идентификатор наживки (первичный ключ)">
+                <constraints primaryKey="true" primaryKeyName="PK_BAIT_ID" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)" remarks="Наименование наживки"/>
+            <column name="technic" type="varchar(255)" remarks="Техника ловли на наживку"/>
+            <column name="type" type="varchar(255)" remarks="Тип наживки"/>
+        </createTable>
         <sql>
-            create table baits (
-                                   bait_id bigint not null,
-                                   name varchar(255),
-                                   technic varchar(255),
-                                   type varchar(255),
-                                   primary key (bait_id)
-            );
             alter table if exists bitings
                 add constraint FKt9pw75k1snryycw8dlkrwp23u
                 foreign key (bait_id)
                 references baits;
-            create sequence bait_id_seq start with 1000 increment by 1;
         </sql>
         <comment>create table BAITS</comment>
     </changeSet>
+
+    <changeSet id="add-bait_id_seq-1" author="dsmirnov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="BAIT_ID_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="BAIT_ID_SEQ" minValue="1000" maxValue="9223372036854775807"
+                        startValue="1000" incrementBy="1"/>
+        <comment>add lake seq</comment>
+    </changeSet>
+
 </databaseChangeLog>

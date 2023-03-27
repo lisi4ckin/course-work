@@ -9,14 +9,17 @@
                 <tableExists tableName="FISHERMEN"/>
             </not>
         </preConditions>
+        <createTable tableName="fishermen">
+            <column name="fisherman_id" type="bigint" remarks="Идентификатор рыбака (первичный ключ)">
+                <constraints primaryKey="true" primaryKeyName="pk_fisherman_id" nullable="false"/>
+            </column>
+            <column name="age" type="integer" remarks="Возраст рыбака">
+                <constraints nullable="true"/>
+            </column>
+            <column name="experience" type="integer" remarks="Опыт рыбака"/>
+            <column name="full_name" type="varchar(255)" remarks="ФИО рыбака"/>
+        </createTable>
         <sql>
-            create table fishermen (
-                                       fisherman_id bigint not null,
-                                       age integer,
-                                       experience integer,
-                                       full_name varchar(255),
-                                       primary key (fisherman_id)
-            );
             alter table if exists preferences
                 add constraint FKmjkiix4h522erailo2mlaf4r8
                 foreign key (fisherman_id)
@@ -25,9 +28,18 @@
                 add constraint FKhfygk75ma8mbb60251p69mkl4
                 foreign key (fisherman_id)
                 references fishermen;
-
-            create sequence fisherman_id_seq start with 1000 increment by 1;
         </sql>
-        <comment>create table FISHERMEN</comment>
+        <comment>create table fishermen</comment>
+    </changeSet>
+
+    <changeSet id="add-fisherman_id_seq-1" author="alisitsin">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="FISHERMAN_ID_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="FISHERMAN_ID_SEQ" minValue="1000" maxValue="9223372036854775807"
+                        startValue="1000" incrementBy="1"/>
+        <comment>add fisherman seq</comment>
     </changeSet>
 </databaseChangeLog>

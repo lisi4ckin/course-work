@@ -9,15 +9,16 @@
                 <tableExists tableName="FISHES"/>
             </not>
         </preConditions>
+        <createTable tableName="fishes">
+            <column name="fish_id" type="bigint" remarks="Идентификатор рыбы (первичный ключ)">
+                <constraints primaryKey="true" primaryKeyName="PK_FISH_ID" nullable="false"/>
+            </column>
+            <column name="average_weight" type="float4" remarks="Средний вес рыбы"/>
+            <column name="end_date_of_prohibition" type="varchar(255)" remarks="Дата окончания сезона ловли (месяц)"/>
+            <column name="start_date_of_prohibition" type="varchar(255)" remarks="Дата начала сезона ловли (месяц)"/>
+            <column name="name" type="varchar(255)" remarks="Название рыбы"/>
+        </createTable>
         <sql>
-            create table fishes (
-                                    fish_id bigint not null,
-                                    average_weight float4,
-                                    end_date_of_prohibition varchar(255),
-                                    name varchar(255),
-                                    start_date_of_prohibition varchar(255),
-                                    primary key (fish_id)
-            );
             alter table if exists preferences
                 add constraint FK63uf1aps6jaungiveg2jaddmx
                 foreign key (fish_id)
@@ -30,8 +31,18 @@
                 add constraint FKd35qn48y0552dcb2wia5kpbcq
                 foreign key (fish_id)
                 references fishes;
-            create sequence fish_id_seq start with 1000 increment by 1;
         </sql>
-        <comment>create table FISHES</comment>
+        <comment>create table fishes</comment>
+    </changeSet>
+
+    <changeSet id="add-fish_id_seq-1" author="dsmirnov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="FISH_ID_SEQ"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="FISH_ID_SEQ" minValue="1000" maxValue="9223372036854775807"
+                        startValue="1000" incrementBy="1"/>
+        <comment>add fish seq</comment>
     </changeSet>
 </databaseChangeLog>
