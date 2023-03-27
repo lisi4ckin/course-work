@@ -1,7 +1,6 @@
 package fishclub.ru.fishclubserver.entity;
 
 import fishclub.ru.fishclubserver.entity.base.BaseEntity;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

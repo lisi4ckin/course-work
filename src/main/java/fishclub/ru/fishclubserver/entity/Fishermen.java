@@ -2,6 +2,7 @@ package fishclub.ru.fishclubserver.entity;
 
 import fishclub.ru.fishclubserver.entity.base.BaseEntity;
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -28,7 +29,7 @@ public class Fishermen extends BaseEntity {
     private Integer age;
     @Column(name = "EXPERIENCE")
     private Integer experience;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "PREFERENCES",
             joinColumns = {@JoinColumn(name = "FISHERMAN_ID", nullable = false)},
             inverseJoinColumns = {@JoinColumn(name = "FISH_ID")}
