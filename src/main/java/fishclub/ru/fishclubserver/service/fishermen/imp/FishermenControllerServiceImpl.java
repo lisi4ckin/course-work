@@ -11,10 +11,7 @@ import fishclub.ru.fishclubserver.service.fishermen.FishermenService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class FishermenControllerServiceImpl implements FishermenControllerService {
@@ -33,6 +30,12 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
         newFishermen.setPreferencesFishes(fishService.getFishesByIds(getFishesIds(request.getPreferencesFish())));
         newFishermen = fishermenService.createFishermen(newFishermen);
         return fishermenMapper.mapToDto(newFishermen);
+    }
+
+    @Override
+    public FishermenResponseDto getFishermenById(String id) {
+        Fishermen fishermen = fishermenService.getFishermenById(Long.parseLong(id));
+        return fishermenMapper.mapToDto(fishermen);
     }
 
     private List<Long> getFishesIds(List<FishReferenceDto> listReferences) {

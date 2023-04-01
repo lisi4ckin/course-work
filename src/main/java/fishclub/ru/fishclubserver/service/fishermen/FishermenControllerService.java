@@ -5,4 +5,6 @@ import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
 
 public interface FishermenControllerService {
     FishermenResponseDto createNewFishermen(FishermenRequestDto request);
+
+    FishermenResponseDto getFishermenById(String id);
 }

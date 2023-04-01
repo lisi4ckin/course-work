@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class FishermenController {
 
     @Resource
-
     private FishermenControllerService fishermenControllerService;
 
     @PostMapping
@@ -33,7 +32,8 @@ public class FishermenController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<FishermenResponseDto> getFishermanById(
             @PathVariable("id") String fishermanId) {
-        return null;
+        FishermenResponseDto result = fishermenControllerService.getFishermenById(fishermanId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")

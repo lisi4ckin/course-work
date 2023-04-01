@@ -3,13 +3,14 @@ package fishclub.ru.fishclubserver.mapper.fishermen;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenRequestDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
 import fishclub.ru.fishclubserver.entity.Fishermen;
+import fishclub.ru.fishclubserver.mapper.reference.FishReferenceMapper;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring",
-        uses = {},
+        uses = {FishReferenceMapper.class},
         imports = {})
 public interface FishermenMapper {
 
@@ -26,6 +27,7 @@ public interface FishermenMapper {
     @Mapping(target = "fullName", source = "fullName")
     @Mapping(target = "age", source = "age")
     @Mapping(target = "experience", source = "experience")
+    @Mapping(target ="preferencesFishes", source = "preferencesFishes", qualifiedByName = "fishReferenceBase")
     FishermenResponseDto mapToDto(Fishermen entity);
 
 }

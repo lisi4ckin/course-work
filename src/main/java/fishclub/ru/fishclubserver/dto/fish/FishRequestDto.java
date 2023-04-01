@@ -9,12 +9,15 @@ import lombok.Setter;
 @Schema(description = "Информация для создания/обновления данных о рыбе")
 public class FishRequestDto {
 
-    @Schema(description = "Идентификатор рыбы")
-    private String id;
     @Schema(description = "Наименование рыбы")
     private String fishName;
+
     @Schema(description = "Средний вес рыбы (в кг)")
     private Float avgWeight;
+
+    @Schema(description = "Дата начала запрета на ловлю рыбы (месяц)")
     private String startDateOfProhibition;
+
+    @Schema(description = "Дата окончания запрета на ловлю рыбы (месяц)")
     private String endDateOfProhibition;
 }
