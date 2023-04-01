@@ -6,6 +6,7 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service("fishService")
 public class FishService {
@@ -20,5 +21,13 @@ public class FishService {
 
     public List<Fish> getFishesByIds(List<Long> ids) {
         return fishRepository.getEntityList(ids);
+    }
+
+    public Fish getFishById(Long fishId) {
+        Fish result = fishRepository.getEntity(fishId);
+        if (Objects.isNull(result)) {
+            return null;
+        }
+        return result;
     }
 }

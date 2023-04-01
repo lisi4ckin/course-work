@@ -7,4 +7,6 @@ public interface FishermenControllerService {
     FishermenResponseDto createNewFishermen(FishermenRequestDto request);
 
     FishermenResponseDto getFishermenById(String id);
+
+    FishermenResponseDto updateFishermen(String id, FishermenRequestDto request);
 }

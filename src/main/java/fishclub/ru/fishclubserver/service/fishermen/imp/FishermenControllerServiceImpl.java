@@ -26,8 +26,7 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
 
     @Override
     public FishermenResponseDto createNewFishermen(FishermenRequestDto request) {
-        Fishermen newFishermen = fishermenMapper.mapToEntity(request);
-        newFishermen.setPreferencesFishes(fishService.getFishesByIds(getFishesIds(request.getPreferencesFish())));
+        Fishermen newFishermen = fishermenMapper.mapToEntity(request, getFishesIds(request.getPreferencesFish()));
         newFishermen = fishermenService.createFishermen(newFishermen);
         return fishermenMapper.mapToDto(newFishermen);
     }
@@ -36,6 +35,14 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
     public FishermenResponseDto getFishermenById(String id) {
         Fishermen fishermen = fishermenService.getFishermenById(Long.parseLong(id));
         return fishermenMapper.mapToDto(fishermen);
+    }
+
+    @Override
+    public FishermenResponseDto updateFishermen(String id, FishermenRequestDto request) {
+        Fishermen updFishermen = fishermenService.getFishermenById(Long.parseLong(id));
+        Fishermen curFishermen = fishermenMapper.mapToEntity(request, getFishesIds(request.getPreferencesFish()));
+        fishermenService.updateFishermen(updFishermen, curFishermen);
+        return fishermenMapper.mapToDto(updFishermen);
     }
 
     private List<Long> getFishesIds(List<FishReferenceDto> listReferences) {

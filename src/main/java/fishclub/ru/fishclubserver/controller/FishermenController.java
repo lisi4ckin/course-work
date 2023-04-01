@@ -40,7 +40,8 @@ public class FishermenController {
     public ResponseEntity<FishermenResponseDto> updateFishermanById(
             @PathVariable("id") String fishermanId,
             @RequestBody FishermenRequestDto request) {
-        return null;
+        FishermenResponseDto result = fishermenControllerService.updateFishermen(fishermanId, request);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")

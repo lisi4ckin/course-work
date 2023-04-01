@@ -5,9 +5,13 @@ import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
 import fishclub.ru.fishclubserver.entity.Fishermen;
 import fishclub.ru.fishclubserver.mapper.reference.FishReferenceMapper;
 import org.mapstruct.BeanMapping;
+import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
+
+import java.util.List;
 
 @Mapper(componentModel = "spring",
         uses = {FishReferenceMapper.class},
@@ -16,10 +20,11 @@ public interface FishermenMapper {
 
     @Named("baseFishermenMapper")
     @BeanMapping(ignoreByDefault = true)
-    @Mapping(target = "age", source = "age")
-    @Mapping(target = "experience", source = "experience")
-    @Mapping(target = "fullName", source = "fullName")
-    Fishermen mapToEntity(FishermenRequestDto request);
+    @Mapping(target = "age", source = "request.age")
+    @Mapping(target = "experience", source = "request.experience")
+    @Mapping(target = "fullName", source = "request.fullName")
+    @Mapping(target = "preferencesFishes", source = "fishesIds", qualifiedByName = "fishes")
+    Fishermen mapToEntity(FishermenRequestDto request, List<Long> fishesIds);
 
     @Named("baseFishermenDtoMapper")
     @BeanMapping(ignoreByDefault = true)
@@ -29,5 +34,14 @@ public interface FishermenMapper {
     @Mapping(target = "experience", source = "experience")
     @Mapping(target ="preferencesFishes", source = "preferencesFishes", qualifiedByName = "fishReferenceBase")
     FishermenResponseDto mapToDto(Fishermen entity);
+
+    @Named("fishermenUpdate")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "age")
+    @Mapping(target = "preferencesFishes")
+    @Mapping(target = "experience")
+    @Mapping(target = "fullName")
+    @Mapping(target = "distancesToLakes")
+    void updateFishermen(Fishermen curFishermen, @MappingTarget Fishermen updFishermen);
 
 }
