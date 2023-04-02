@@ -23,6 +23,7 @@ import java.util.List;
 @SequenceGenerator(name = "seq_gen", sequenceName = "FISHERMAN_ID_SEQ", allocationSize = 1, initialValue = 1000)
 @AttributeOverride(name = "id", column = @Column(name = "FISHERMAN_ID"))
 public class Fishermen extends BaseEntity {
+
     @Column(name = "FULL_NAME")
     private String fullName;
     @Column(name = "AGE")

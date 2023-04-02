@@ -35,4 +35,8 @@ public class FishermenService {
         fishermenRepository.save(updFishermen);
         return updFishermen;
     }
+
+    public void deleteFishermen(Long id) {
+        fishermenRepository.deleteById(id);
+    }
 }

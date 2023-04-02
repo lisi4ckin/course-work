@@ -45,6 +45,11 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
         return fishermenMapper.mapToDto(updFishermen);
     }
 
+    @Override
+    public void deleteFishermenById(String id) {
+        fishermenService.deleteFishermen(Long.parseLong(id));
+    }
+
     private List<Long> getFishesIds(List<FishReferenceDto> listReferences) {
         return listReferences.stream().map(item -> Long.parseLong(item.getId())).toList();
     }

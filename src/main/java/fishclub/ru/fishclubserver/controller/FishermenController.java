@@ -47,6 +47,6 @@ public class FishermenController {
     @DeleteMapping(path = "/{id}")
     public void deleteFishermanById(
             @PathVariable("id") String fishermanId) {
-
+        fishermenControllerService.deleteFishermenById(fishermanId);
     }
 }

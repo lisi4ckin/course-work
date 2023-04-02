@@ -9,4 +9,6 @@ public interface FishermenControllerService {
     FishermenResponseDto getFishermenById(String id);
 
     FishermenResponseDto updateFishermen(String id, FishermenRequestDto request);
+
+    void deleteFishermenById(String id);
 }
