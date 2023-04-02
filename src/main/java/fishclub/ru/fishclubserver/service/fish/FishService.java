@@ -1,6 +1,7 @@
 package fishclub.ru.fishclubserver.service.fish;
 
 import fishclub.ru.fishclubserver.entity.Fish;
+import fishclub.ru.fishclubserver.mapper.fish.FishMapper;
 import fishclub.ru.fishclubserver.repository.fish.FishRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class FishService {
 
     @Resource
     private FishRepository fishRepository;
+
+    @Resource
+    private FishMapper fishMapper;
 
     public Fish createNewFish(Fish request) {
         fishRepository.save(request);
@@ -29,5 +33,17 @@ public class FishService {
             return null;
         }
         return result;
+    }
+
+    public Fish updateFish(Fish updFish, Fish curFish) {
+        fishMapper.updateFish(curFish, updFish);
+        fishRepository.save(updFish);
+        return updFish;
+    }
+
+    public void deleteFish(Long id) {
+        if (fishRepository.existsById(id)) {
+            fishRepository.deleteById(id);
+        }
     }
 }

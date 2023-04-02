@@ -4,10 +4,7 @@ import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fish.FishRequestDto;
 import fishclub.ru.fishclubserver.dto.fish.FishResponseDto;
 import fishclub.ru.fishclubserver.entity.Fish;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 @Mapper(componentModel = "spring",
         imports = {}, uses = {Long.class})
@@ -29,5 +26,15 @@ public interface FishMapper {
     @Mapping(target = "startDateOfProhibition", source = "startDateOfProhibition")
     @Mapping(target = "endDateOfProhibition", source = "endDateOfProhibition")
     FishResponseDto mapToDto(Fish entity);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "fishermen", ignore = true)
+    @Mapping(target = "averageWeight")
+    @Mapping(target = "fishName")
+    @Mapping(target = "baits")
+    @Mapping(target = "startDateOfProhibition")
+    @Mapping(target = "endDateOfProhibition")
+    @Mapping(target = "findInLakes")
+    void updateFish(Fish curFish, @MappingTarget Fish updFish);
 
 }

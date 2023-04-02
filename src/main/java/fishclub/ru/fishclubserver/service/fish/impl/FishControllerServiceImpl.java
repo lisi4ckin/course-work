@@ -23,4 +23,26 @@ public class FishControllerServiceImpl implements FishControllerService {
         newFish = fishService.createNewFish(newFish);
         return fishMapper.mapToDto(newFish);
     }
+
+    @Override
+    public FishResponseDto getFishById(String id) {
+        Long fishId = Long.parseLong(id);
+        Fish fish = fishService.getFishById(fishId);
+        return fishMapper.mapToDto(fish);
+    }
+
+    @Override
+    public FishResponseDto updateFishById(String id, FishRequestDto request) {
+        Long updFishId = Long.parseLong(id);
+        Fish updFish = fishService.getFishById(updFishId);
+        Fish curFish = fishMapper.mapToEntity(request);
+        fishService.updateFish(updFish, curFish);
+        return fishMapper.mapToDto(updFish);
+    }
+
+    @Override
+    public void deleteFishById(String id) {
+        Long fishDeleteId = Long.parseLong(id);
+        fishService.deleteFish(fishDeleteId);
+    }
 }

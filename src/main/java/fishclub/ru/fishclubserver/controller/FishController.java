@@ -31,18 +31,20 @@ public class FishController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<FishResponseDto> getFishById(
             @PathVariable("id") String fishId) {
-        return null;
+        FishResponseDto result = fishControllerService.getFishById(fishId);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
     @PutMapping(path = "/{id}")
     public ResponseEntity<FishResponseDto> updateFishById(
             @PathVariable("id") String fishId,
             @RequestBody FishRequestDto request) {
-        return null;
+        FishResponseDto result = fishControllerService.updateFishById(fishId, request);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
     public void deleteFishById(
             @PathVariable("id") String fishId) {
-
+        fishControllerService.deleteFishById(fishId);
     }
 }
