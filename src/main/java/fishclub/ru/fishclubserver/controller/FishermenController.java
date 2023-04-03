@@ -2,6 +2,7 @@ package fishclub.ru.fishclubserver.controller;
 
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenRequestDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
+import fishclub.ru.fishclubserver.dto.fishermen.list.FishermenListResultDto;
 import fishclub.ru.fishclubserver.service.fishermen.FishermenControllerService;
 import jakarta.annotation.Resource;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/fishermen")
 public class FishermenController {
@@ -26,6 +29,12 @@ public class FishermenController {
     public ResponseEntity<FishermenResponseDto> createNewFishermen(
             @RequestBody FishermenRequestDto request) {
         FishermenResponseDto result = fishermenControllerService.createNewFishermen(request);
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<FishermenListResultDto>> getFishermenList() {
+        List<FishermenListResultDto> result = fishermenControllerService.getFishermenList();
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

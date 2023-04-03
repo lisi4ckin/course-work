@@ -1,11 +1,14 @@
 package fishclub.ru.fishclubserver.mapper.fishermen;
 
+import fishclub.ru.fishclubserver.data.fishermen.entity.FishermenJournalEntity;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenRequestDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
+import fishclub.ru.fishclubserver.dto.fishermen.list.FishermenListResultDto;
 import fishclub.ru.fishclubserver.entity.Fishermen;
 import fishclub.ru.fishclubserver.mapper.reference.FishReferenceMapper;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Context;
+import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -34,6 +37,12 @@ public interface FishermenMapper {
     @Mapping(target = "experience", source = "experience")
     @Mapping(target ="preferencesFishes", source = "preferencesFishes", qualifiedByName = "fishReferenceBase")
     FishermenResponseDto mapToDto(Fishermen entity);
+
+    @Named("fishermenJournalMapper")
+    @Mapping(target = "fishermenFullName", source = "name")
+    FishermenListResultDto mapToDto(FishermenJournalEntity entity);
+    @InheritConfiguration
+    List<FishermenListResultDto> mapToDto(List<FishermenJournalEntity> entities);
 
     @Named("fishermenUpdate")
     @Mapping(target = "id", ignore = true)

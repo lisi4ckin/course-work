@@ -1,8 +1,11 @@
 package fishclub.ru.fishclubserver.service.fishermen.imp;
 
+import fishclub.ru.fishclubserver.data.fishermen.dao.FishermenJournalDao;
+import fishclub.ru.fishclubserver.data.fishermen.entity.FishermenJournalEntity;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenRequestDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
+import fishclub.ru.fishclubserver.dto.fishermen.list.FishermenListResultDto;
 import fishclub.ru.fishclubserver.entity.Fishermen;
 import fishclub.ru.fishclubserver.mapper.fishermen.FishermenMapper;
 import fishclub.ru.fishclubserver.service.fish.FishService;
@@ -23,6 +26,16 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
 
     @Resource
     private FishermenMapper fishermenMapper;
+
+    @Resource
+    private FishermenJournalDao fishermenJournalDao;
+
+    @Override
+    public List<FishermenListResultDto> getFishermenList() {
+
+        List<FishermenJournalEntity> fishermen = fishermenService.getFishermenJournalList();
+        return fishermenMapper.mapToDto(fishermen);
+    }
 
     @Override
     public FishermenResponseDto createNewFishermen(FishermenRequestDto request) {
