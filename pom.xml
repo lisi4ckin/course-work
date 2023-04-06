@@ -108,9 +108,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-<!--				<configuration>-->
-<!--					<mainClass>fishclub.ru.fishclubserver.FishClubServerApplication</mainClass>-->
-<!--				</configuration>-->
+				<configuration>
+					<mainClass>fishclub.ru.fishclubserver.FishClubServerApplication</mainClass>
+				</configuration>
 <!--				<configuration>-->
 <!--					<jvmArguments>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</jvmArguments>-->
 <!--				</configuration>-->
