@@ -1,8 +1,11 @@
 package fishclub.ru.fishclubserver.dto.fish;
 
+import fishclub.ru.fishclubserver.dto.bait.BaitReferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,4 +23,7 @@ public class FishRequestDto {
 
     @Schema(description = "Дата окончания запрета на ловлю рыбы (месяц)")
     private String endDateOfProhibition;
+
+    @Schema(description = "Наживки, на которые клюет рыба")
+    private List<BaitReferenceDto> baits;
 }

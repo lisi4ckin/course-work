@@ -1,13 +1,17 @@
 package fishclub.ru.fishclubserver.mapper.fish;
 
-import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fish.FishRequestDto;
 import fishclub.ru.fishclubserver.dto.fish.FishResponseDto;
 import fishclub.ru.fishclubserver.entity.Fish;
-import org.mapstruct.*;
+import fishclub.ru.fishclubserver.mapper.reference.BaitReferenceMapper;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring",
-        imports = {}, uses = {Long.class})
+        imports = {Long.class}, uses = {BaitReferenceMapper.class})
 public interface FishMapper {
 
     @Named("baseFishMapper")
@@ -16,6 +20,7 @@ public interface FishMapper {
     @Mapping(target = "endDateOfProhibition", source = "endDateOfProhibition")
     @Mapping(target = "fishName", source = "fishName")
     @Mapping(target = "averageWeight", source = "avgWeight")
+    @Mapping(target = "baits", source = "baits", qualifiedByName = "baseBaitMapper")
     Fish mapToEntity(FishRequestDto dto);
 
     @Named("baseResponseFish")
