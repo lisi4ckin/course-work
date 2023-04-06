@@ -13,11 +13,11 @@ spring:
       allowedOrigins: http://localhost:*
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5433/fish_club_db
+    url: jdbc:postgresql://course-work-pg:5432/fish_club_db
     username: COURSE_WORK_USER
     password: b5zB3k1D1
   liquibase:
-    enabled: false
+    enabled: true
     change-log: db/changelog/changelog.xml
   jpa:
     hibernate:
