@@ -1,6 +1,7 @@
 package fishclub.ru.fishclubserver.dto.fish;
 
 import fishclub.ru.fishclubserver.dto.bait.BaitReferenceDto;
+import fishclub.ru.fishclubserver.dto.lake.LakeReferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,4 +27,7 @@ public class FishRequestDto {
 
     @Schema(description = "Наживки, на которые клюет рыба")
     private List<BaitReferenceDto> baits;
+
+    @Schema(description = "Нахождение в озере")
+    private List<LakeReferenceDto> lakes;
 }
