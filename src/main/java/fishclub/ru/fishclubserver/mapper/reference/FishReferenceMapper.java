@@ -1,5 +1,6 @@
 package fishclub.ru.fishclubserver.mapper.reference;
 
+import fishclub.ru.fishclubserver.dto.base.BaseReferenceDto;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.entity.Fish;
 import fishclub.ru.fishclubserver.service.fish.FishService;
@@ -34,5 +35,14 @@ public abstract class FishReferenceMapper {
     @InheritConfiguration
     public List<Fish> mapToEntity(List<Long> fishIds) {
         return fishService.getFishesByIds(fishIds);
+    }
+
+    @Named("fishesReference")
+    public Fish mapRefToEntity(FishReferenceDto reference) {
+        return fishService.getFishById(Long.parseLong(reference.getId()));
+    }
+    @InheritConfiguration
+    public List<Fish> mapRefToEntity(List<FishReferenceDto> reference) {
+        return fishService.getFishesByIds((List<Long>) reference.stream().map(BaseReferenceDto::getId));
     }
 }

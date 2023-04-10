@@ -1,6 +1,7 @@
 package fishclub.ru.fishclubserver.dto.fishermen;
 
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
+import fishclub.ru.fishclubserver.dto.lake.LakeReferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,5 +20,7 @@ public class FishermenRequestDto {
     private Integer experience;
     @Schema(description = "Список предпочитаемых рыб")
     private List<FishReferenceDto> preferencesFish;
+    @Schema(description = "Расстояния до озер")
+    private List<LakeReferenceDto> distances;
 }
 

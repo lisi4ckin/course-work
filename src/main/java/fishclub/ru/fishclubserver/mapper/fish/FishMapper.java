@@ -4,6 +4,7 @@ import fishclub.ru.fishclubserver.dto.fish.FishRequestDto;
 import fishclub.ru.fishclubserver.dto.fish.FishResponseDto;
 import fishclub.ru.fishclubserver.entity.Fish;
 import fishclub.ru.fishclubserver.mapper.reference.BaitReferenceMapper;
+import fishclub.ru.fishclubserver.mapper.reference.LakeReferenceMapper;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -11,7 +12,7 @@ import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring",
-        imports = {Long.class}, uses = {BaitReferenceMapper.class})
+        imports = {Long.class}, uses = {BaitReferenceMapper.class, LakeReferenceMapper.class})
 public interface FishMapper {
 
     @Named("baseFishMapper")
@@ -21,6 +22,7 @@ public interface FishMapper {
     @Mapping(target = "fishName", source = "fishName")
     @Mapping(target = "averageWeight", source = "avgWeight")
     @Mapping(target = "baits", source = "baits", qualifiedByName = "baseBaitMapper")
+    @Mapping(target = "findInLakes", source = "lakes", qualifiedByName = "baseLakeMapper")
     Fish mapToEntity(FishRequestDto dto);
 
     @Named("baseResponseFish")
@@ -30,6 +32,7 @@ public interface FishMapper {
     @Mapping(target = "avgWeight", source = "averageWeight")
     @Mapping(target = "startDateOfProhibition", source = "startDateOfProhibition")
     @Mapping(target = "endDateOfProhibition", source = "endDateOfProhibition")
+    @Mapping(target = "lakes", source = "findInLakes", qualifiedByName = "lakeReferenceBase")
     FishResponseDto mapToDto(Fish entity);
 
     @Mapping(target = "id", ignore = true)
