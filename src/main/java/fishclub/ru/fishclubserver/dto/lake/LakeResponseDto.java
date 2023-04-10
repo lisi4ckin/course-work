@@ -1,5 +1,6 @@
 package fishclub.ru.fishclubserver.dto.lake;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -26,5 +27,6 @@ public class LakeResponseDto {
     private String endSeasonDate;
 
     @Schema(description = "Рыбы, которые водятся в озере")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FishReferenceDto> fishInLakes;
 }

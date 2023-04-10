@@ -2,6 +2,7 @@ package fishclub.ru.fishclubserver.dto.fishermen;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
+import fishclub.ru.fishclubserver.dto.lake.LakeReferenceDto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,4 +29,8 @@ public class FishermenResponseDto {
     @Schema(description = "Список предпочитаемых рыб")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FishReferenceDto> preferencesFishes;
+
+    @Schema(description = "Список озер, на которых рыбачит рыбак")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private List<LakeReferenceDto> lakes;
 }

@@ -20,7 +20,4 @@ public class LakeRequestDto {
 
     @Schema(description = "Дата окончания сезона ловли")
     private String endSeasonDate;
-
-    @Schema(description = "Рыбы, которые водятся в озере")
-    private List<FishReferenceDto> fishInLakes;
 }

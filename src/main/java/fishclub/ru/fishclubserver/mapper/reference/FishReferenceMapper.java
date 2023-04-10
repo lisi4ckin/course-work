@@ -5,7 +5,6 @@ import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.entity.Fish;
 import fishclub.ru.fishclubserver.service.fish.FishService;
 import jakarta.annotation.Resource;
-import org.apache.commons.lang3.StringUtils;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.InheritConfiguration;
 import org.mapstruct.Mapper;
