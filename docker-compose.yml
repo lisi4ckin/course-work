@@ -1,0 +1,53 @@
+version: '3'
+services:
+  app1:
+    container_name: course-work-app-1
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+    ports:
+      - "8890:8890"
+    networks:
+      - spring-cloud-network
+  app2:
+    container_name: course-work-app-2
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+    ports:
+      - "8891:8890"
+    networks:
+      - spring-cloud-network
+  db:
+    container_name: db
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres
+      - POSTGRES_DB=compose-postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - spring-cloud-network
+  lb:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "9090:9090"
+    depends_on:
+      - app1
+      - app2
+networks:
+  spring-cloud-network:
+    driver: bridge
