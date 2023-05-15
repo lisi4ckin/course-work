@@ -13,6 +13,7 @@ public class FishermenJournalMapper implements RowMapper<FishermenJournalEntity>
     @Override
     public FishermenJournalEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
         final FishermenJournalEntity result = new FishermenJournalEntity();
+        result.setFishermenId(String.valueOf(rs.getLong("FISHERMAN_ID")));
         result.setAge(rs.getLong("AGE"));
         result.setExperience(rs.getLong("EXPERIENCE"));
         result.setName(rs.getString("FULL_NAME"));
