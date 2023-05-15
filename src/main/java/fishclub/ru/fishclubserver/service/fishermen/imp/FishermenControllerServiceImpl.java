@@ -1,6 +1,5 @@
 package fishclub.ru.fishclubserver.service.fishermen.imp;
 
-import fishclub.ru.fishclubserver.data.fishermen.dao.FishermenJournalDao;
 import fishclub.ru.fishclubserver.data.fishermen.entity.FishermenJournalEntity;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenRequestDto;
@@ -27,9 +26,6 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
     @Resource
     private FishermenMapper fishermenMapper;
 
-    @Resource
-    private FishermenJournalDao fishermenJournalDao;
-
     @Override
     public List<FishermenListResultDto> getFishermenList() {
 
@@ -39,7 +35,8 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
 
     @Override
     public FishermenResponseDto createNewFishermen(FishermenRequestDto request) {
-        Fishermen newFishermen = fishermenMapper.mapToEntity(request, getFishesIds(request.getPreferencesFish()));
+        Fishermen newFishermen = fishermenMapper.mapToEntity(request,
+                (request.getPreferencesFish() != null) ? getFishesIds(request.getPreferencesFish()) : null);
         newFishermen = fishermenService.createFishermen(newFishermen);
         return fishermenMapper.mapToDto(newFishermen);
     }
@@ -53,7 +50,8 @@ public class FishermenControllerServiceImpl implements FishermenControllerServic
     @Override
     public FishermenResponseDto updateFishermen(String id, FishermenRequestDto request) {
         Fishermen updFishermen = fishermenService.getFishermenById(Long.parseLong(id));
-        Fishermen curFishermen = fishermenMapper.mapToEntity(request, getFishesIds(request.getPreferencesFish()));
+        Fishermen curFishermen = fishermenMapper.mapToEntity(request,
+                (request.getPreferencesFish() != null) ? getFishesIds(request.getPreferencesFish()) : null);
         fishermenService.updateFishermen(updFishermen, curFishermen);
         return fishermenMapper.mapToDto(updFishermen);
     }
