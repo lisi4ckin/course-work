@@ -15,6 +15,7 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Named;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring",
@@ -44,8 +45,14 @@ public interface FishermenMapper {
     @Named("fishermenJournalMapper")
     @Mapping(target = "fishermenFullName", source = "name")
     FishermenListResultDto mapToDto(FishermenJournalEntity entity);
-    @InheritConfiguration
-    List<FishermenListResultDto> mapToDto(List<FishermenJournalEntity> entities);
+
+    default List<FishermenListResultDto> mapToDto(List<FishermenJournalEntity> entities) {
+        List<FishermenListResultDto> result = new ArrayList<>();
+        for (FishermenJournalEntity fisherman : entities) {
+            result.add(mapToDto(fisherman));
+        }
+        return result;
+    }
 
     @Named("fishermenUpdate")
     @Mapping(target = "id", ignore = true)
