@@ -11,6 +11,8 @@ import fishclub.ru.fishclubserver.service.fish.FishService;
 import fishclub.ru.fishclubserver.service.fishermen.FishermenControllerService;
 import fishclub.ru.fishclubserver.service.fishermen.FishermenService;
 import jakarta.annotation.Resource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,18 +20,20 @@ import java.util.List;
 @Service
 public class FishermenControllerServiceImpl implements FishermenControllerService {
 
+    private final Logger LOG = LoggerFactory.getLogger(FishermenControllerServiceImpl.class);
+
     @Resource(name = "fishService")
     private FishService fishService;
     @Resource
     private FishermenService fishermenService;
-
     @Resource
     private FishermenMapper fishermenMapper;
 
     @Override
     public List<FishermenListResultDto> getFishermenList() {
-
+        LOG.info("operation=FishermenControllerServiceImpl.getFishermenList, action=start");
         List<FishermenJournalEntity> fishermen = fishermenService.getFishermenJournalList();
+        LOG.info("operation=FishermenControllerServiceImpl.getFishermenList, action=end, params={}", fishermen);
         return fishermenMapper.mapToDto(fishermen);
     }
 
