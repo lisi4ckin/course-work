@@ -1,5 +1,36 @@
 version: '3'
 services:
+  elasticsearch:
+    image: elasticsearch:7.10.1
+    container_name: elasticsearch
+    volumes:
+      - ./volumes/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+  logstash:
+    image: logstash:7.10.1
+    container_name: logstash
+    command: -f /etc/logstash/conf.d/
+    volumes:
+      - ./volumes/logstash/:/etc/logstash/conf.d/
+    ports:
+      - "9999:9999"
+    environment:
+      LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    depends_on:
+      - elasticsearch
+  kibana:
+    image: kibana:7.10.1
+    container_name: kibana
+    volumes:
+      - ./volumes/kibana/:/usr/share/kibana/config/
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
   lb:
     build:
       context: ./nginx
@@ -15,6 +46,8 @@ services:
     container_name: course-work-app-1
     build:
       context: .
+    links:
+      - logstash
     depends_on:
       - db
     environment:
@@ -29,6 +62,8 @@ services:
     container_name: course-work-app-2
     build:
       context: .
+    links:
+      - logstash
     depends_on:
       - db
     environment:
