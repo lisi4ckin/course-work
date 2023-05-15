@@ -7,9 +7,8 @@ import lombok.Data;
 @Schema(description = "Информация для журнала рыболовов")
 public class FishermenListResultDto {
 
+    private String fishermenId;
     private String fishermenFullName;
-
     private Long age;
-
     private Long experience;
 }

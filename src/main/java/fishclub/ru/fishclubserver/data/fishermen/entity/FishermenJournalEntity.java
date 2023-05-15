@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class FishermenJournalEntity extends BaseJournalEntity<Long> {
 
+    private String fishermenId;
     private String name;
     private Long age;
     private Long experience;

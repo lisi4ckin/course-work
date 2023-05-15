@@ -30,7 +30,7 @@ public class FishermenJournalDaoImpl extends BaseDao implements FishermenJournal
         List<FishermenJournalEntity> result = null;
         final StringBuilder sql = new StringBuilder();
 
-        sql.append("SELECT fm.FULL_NAME, fm.AGE, fm.EXPERIENCE FROM FISHERMEN fm");
+        sql.append("SELECT fm.FISHERMAN_ID, fm.FULL_NAME, fm.AGE, fm.EXPERIENCE FROM FISHERMEN fm");
         try {
             result = super.getNamedParameterJdbcTemplate().query(sql.toString(), fishermenJournalListExtractor);
         } catch (DataAccessException exception) {
