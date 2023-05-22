@@ -4,7 +4,12 @@ import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fish.FishRequestDto;
 import fishclub.ru.fishclubserver.dto.fish.FishResponseDto;
 
+import java.util.List;
+
 public interface FishControllerService {
+
+    List<FishReferenceDto> getFishesReference();
+
     FishResponseDto createFish(FishRequestDto request);
 
     FishResponseDto getFishById(String id);
