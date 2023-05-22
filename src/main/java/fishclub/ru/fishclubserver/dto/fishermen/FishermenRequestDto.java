@@ -19,7 +19,7 @@ public class FishermenRequestDto {
     @Schema(description = "Опыт рыболова")
     private Integer experience;
     @Schema(description = "Список предпочитаемых рыб")
-    private List<FishReferenceDto> preferencesFish;
+    private List<FishReferenceDto> preferencesFishes;
     @Schema(description = "Расстояния до озер")
     private List<LakeReferenceDto> distances;
 }
