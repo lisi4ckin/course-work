@@ -11,6 +11,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -19,14 +20,19 @@ public abstract class FishReferenceMapper {
     @Resource(name = "fishService")
     private FishService fishService;
 
-    @Named("fishReferenceBase")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", expression = "java(String.valueOf(entity.getId()))")
     @Mapping(target = "referenceName", source = "fishName")
     public abstract FishReferenceDto mapToDto(Fish entity);
 
-    @InheritConfiguration
-    public abstract List<FishReferenceDto> mapToDto(List<Fish> entity);
+    @Named("fishReferenceBase")
+    public List<FishReferenceDto> mapToDto(List<Fish> entity) {
+        List<FishReferenceDto> result = new ArrayList<>();
+        for (Fish fish : entity) {
+            result.add(mapToDto(fish));
+        }
+        return result;
+    }
 
     @Named("fishes")
     public Fish mapToEntity(Long fishId) {

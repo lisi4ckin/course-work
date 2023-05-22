@@ -23,6 +23,10 @@ public class FishService {
         return request;
     }
 
+    public List<Fish> getAllFishes() {
+        return fishRepository.findAll();
+    }
+
     public List<Fish> getFishesByIds(List<Long> ids) {
         return fishRepository.getEntityList(ids);
     }
