@@ -10,6 +10,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -18,13 +19,20 @@ public abstract class LakeReferenceMapper {
     @Resource
     private LakeService lakeService;
 
-    @Named("lakeReferenceBase")
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", expression = "java(String.valueOf(entity.getId()))")
     @Mapping(target = "referenceName", source = "lakeName")
     public abstract LakeReferenceDto mapToDto(Lake entity);
-    @InheritConfiguration
-    public abstract List<LakeReferenceDto> mapToDto(List<Lake> entity);
+    @Named("lakeReferenceBase")
+    public List<LakeReferenceDto> mapToDto(List<Lake> entity) {
+        List<LakeReferenceDto> result = new ArrayList<>();
+        if (entity != null) {
+            for (Lake lake : entity) {
+                result.add(mapToDto(lake));
+            }
+        }
+        return result;
+    };
 
     @Named("baseLakeMapper")
     public Lake mapToEntity(LakeReferenceDto dto) {
