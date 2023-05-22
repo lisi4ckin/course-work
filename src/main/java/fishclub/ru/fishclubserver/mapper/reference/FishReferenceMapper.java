@@ -28,8 +28,10 @@ public abstract class FishReferenceMapper {
     @Named("fishReferenceBase")
     public List<FishReferenceDto> mapToDto(List<Fish> entity) {
         List<FishReferenceDto> result = new ArrayList<>();
-        for (Fish fish : entity) {
-            result.add(mapToDto(fish));
+        if (entity != null) {
+            for (Fish fish : entity) {
+                result.add(mapToDto(fish));
+            }
         }
         return result;
     }
