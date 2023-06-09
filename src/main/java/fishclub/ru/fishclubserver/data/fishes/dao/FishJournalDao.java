@@ -4,7 +4,7 @@ import fishclub.ru.fishclubserver.data.fishes.entity.FishJournalEntity;
 
 import java.util.List;
 
-public interface FishjournalDao {
+public interface FishJournalDao {
 
     List<FishJournalEntity> get();
 }
