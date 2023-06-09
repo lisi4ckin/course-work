@@ -29,7 +29,7 @@ public class FishControllerServiceImpl implements FishControllerService {
     @Override
     public List<FishJournalDto> getJournal() {
         List<FishJournalEntity> result = fishService.getJournal();
-        return fishMapper.mapToDto();
+        return fishMapper.mapToDto(result);
     }
 
     @Override
