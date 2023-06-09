@@ -1,5 +1,7 @@
 package fishclub.ru.fishclubserver.service.fish.impl;
 
+import fishclub.ru.fishclubserver.data.fishes.entity.FishJournalEntity;
+import fishclub.ru.fishclubserver.dto.fish.FishJournalDto;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fish.FishRequestDto;
 import fishclub.ru.fishclubserver.dto.fish.FishResponseDto;
@@ -23,6 +25,12 @@ public class FishControllerServiceImpl implements FishControllerService {
 
     @Resource
     private FishReferenceMapper fishReferenceMapper;
+
+    @Override
+    public List<FishJournalDto> getJournal() {
+        List<FishJournalEntity> result = fishService.getJournal();
+        return fishMapper.mapToDto();
+    }
 
     @Override
     public List<FishReferenceDto> getFishesReference() {
