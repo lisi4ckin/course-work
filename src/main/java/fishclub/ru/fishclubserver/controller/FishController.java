@@ -1,5 +1,6 @@
 package fishclub.ru.fishclubserver.controller;
 
+import fishclub.ru.fishclubserver.dto.fish.FishJournalDto;
 import fishclub.ru.fishclubserver.dto.fish.FishReferenceDto;
 import fishclub.ru.fishclubserver.dto.fish.FishRequestDto;
 import fishclub.ru.fishclubserver.dto.fish.FishResponseDto;
@@ -25,6 +26,12 @@ public class FishController {
 
     @Resource(name = "fishControllerService")
     private FishControllerService fishControllerService;
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<FishJournalDto>> getFishes() {
+        List<FishJournalDto> result = fishControllerService.getJournal();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
     @GetMapping(path = "/ref", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<FishReferenceDto>> getFishesReference() {

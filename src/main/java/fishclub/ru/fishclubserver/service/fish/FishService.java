@@ -1,7 +1,9 @@
 package fishclub.ru.fishclubserver.service.fish;
 
+import fishclub.ru.fishclubserver.data.fishes.entity.FishJournalEntity;
 import fishclub.ru.fishclubserver.entity.Fish;
 import fishclub.ru.fishclubserver.mapper.fish.FishMapper;
+import fishclub.ru.fishclubserver.repository.fish.FishJournalRepository;
 import fishclub.ru.fishclubserver.repository.fish.FishRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,13 @@ public class FishService {
 
     @Resource
     private FishMapper fishMapper;
+
+    @Resource
+    private FishJournalRepository fishJournalRepository;
+
+    public List<FishJournalEntity> getJournal() {
+        return fishJournalRepository.getJournalList();
+    }
 
     public Fish createNewFish(Fish request) {
         fishRepository.save(request);
