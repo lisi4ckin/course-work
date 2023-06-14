@@ -4,17 +4,13 @@ import fishclub.ru.fishclubserver.dto.fishermen.FishermenRequestDto;
 import fishclub.ru.fishclubserver.dto.fishermen.FishermenResponseDto;
 import fishclub.ru.fishclubserver.dto.fishermen.list.FishermenListResultDto;
 import fishclub.ru.fishclubserver.service.fishermen.FishermenControllerService;
-import jakarta.annotation.Resource;
+import fishclub.ru.fishclubserver.service.fishermen.FishermenReportService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,8 +18,11 @@ import java.util.List;
 @RequestMapping(path = "/fishermen")
 public class FishermenController {
 
-    @Resource
+    @Autowired
     private FishermenControllerService fishermenControllerService;
+
+    @Autowired
+    private FishermenReportService reportService;
 
     @PostMapping
     public ResponseEntity<FishermenResponseDto> createNewFishermen(
@@ -57,5 +56,15 @@ public class FishermenController {
     public void deleteFishermanById(
             @PathVariable("id") String fishermanId) {
         fishermenControllerService.deleteFishermenById(fishermanId);
+    }
+
+    @GetMapping(path = "/report")
+    @ResponseBody
+    public ResponseEntity<Resource> getReport() {
+        Resource reportFile = reportService.getFishermenReport();
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" +
+                        reportFile.getFilename() + "\"")
+                .body(reportFile);
     }
 }
