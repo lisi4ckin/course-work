@@ -30,6 +30,10 @@ public class Fishermen extends BaseEntity {
     private Integer age;
     @Column(name = "EXPERIENCE")
     private Integer experience;
+    @Column(name = "PASSPORT_SERIES")
+    private String passportSeries;
+    @Column(name = "PASSPORT_NUMBER")
+    private String passportNumber;
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "PREFERENCES",
             joinColumns = {@JoinColumn(name = "FISHERMAN_ID", nullable = false)},

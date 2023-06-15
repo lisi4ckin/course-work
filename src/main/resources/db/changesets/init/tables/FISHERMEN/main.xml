@@ -17,6 +17,8 @@
                 <constraints nullable="true"/>
             </column>
             <column name="experience" type="integer" remarks="Опыт рыбака"/>
+            <column name="passport_number" type="varchar(255)" remarks="Номер паспорта"/>
+            <column name="passport_series" type="varchar(255)" remarks="Серия паспорта"/>
             <column name="full_name" type="varchar(255)" remarks="ФИО рыбака"/>
         </createTable>
         <sql>

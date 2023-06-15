@@ -12,4 +12,6 @@ public class FishermenJournalEntity extends BaseJournalEntity<Long> {
     private String name;
     private Long age;
     private Long experience;
+    private String passportSeries;
+    private String passportNumber;
 }

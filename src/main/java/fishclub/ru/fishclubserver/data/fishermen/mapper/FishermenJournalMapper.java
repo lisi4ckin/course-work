@@ -16,6 +16,8 @@ public class FishermenJournalMapper implements RowMapper<FishermenJournalEntity>
         result.setFishermenId(String.valueOf(rs.getLong("FISHERMAN_ID")));
         result.setAge(rs.getLong("AGE"));
         result.setExperience(rs.getLong("EXPERIENCE"));
+        result.setPassportSeries(rs.getString("PASSPORT_SERIES"));
+        result.setPassportNumber(rs.getString("PASSPORT_NUMBER"));
         result.setName(rs.getString("FULL_NAME"));
 
         return result;
