@@ -1,7 +1,11 @@
 package fishclub.ru.fishclubserver.service.bait;
 
+import fishclub.ru.fishclubserver.data.baits.entity.BaitJournalEntity;
+import fishclub.ru.fishclubserver.data.fishes.entity.FishJournalEntity;
 import fishclub.ru.fishclubserver.entity.Bait;
+import fishclub.ru.fishclubserver.entity.Fish;
 import fishclub.ru.fishclubserver.mapper.bait.BaitMapper;
+import fishclub.ru.fishclubserver.repository.bait.BaitJournalRepository;
 import fishclub.ru.fishclubserver.repository.bait.BaitRepository;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -16,6 +20,9 @@ public class BaitService {
 
     @Resource
     private BaitRepository baitRepository;
+
+    @Resource
+    private BaitJournalRepository baitJournalRepository;
 
     @Resource
     private BaitMapper baitMapper;
@@ -33,6 +40,7 @@ public class BaitService {
         return null;
     }
 
+
     public List<Bait> getBaitByIds(List<Long> ids) {
         if (ids != null && !ids.isEmpty()) {
             return baitRepository.getEntityList(ids);
@@ -43,6 +51,7 @@ public class BaitService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public Bait updateBait(Bait curBait, Bait updBait) {
         baitMapper.updateBait(curBait, updBait);
+        baitRepository.save(updBait);
         return updBait;
     }
 
@@ -51,5 +60,13 @@ public class BaitService {
         if (baitRepository.existsById(id)) {
             baitRepository.deleteById(id);
         }
+    }
+
+    public List<BaitJournalEntity> getJournal() {
+        return baitJournalRepository.getJournalList();
+    }
+
+    public List<Bait> getAllBaits() {
+        return baitRepository.findAll();
     }
 }
