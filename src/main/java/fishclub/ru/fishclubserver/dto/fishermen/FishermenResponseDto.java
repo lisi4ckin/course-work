@@ -26,6 +26,12 @@ public class FishermenResponseDto {
     @Schema(description = "Опыт рыболова")
     private Integer experience;
 
+    @Schema(description = "Серия паспорта")
+    private String passportSeries;
+
+    @Schema(description = "Номер паспорта")
+    private String passportNumber;
+
     @Schema(description = "Список предпочитаемых рыб")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<FishReferenceDto> preferencesFishes;

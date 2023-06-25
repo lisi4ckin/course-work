@@ -28,6 +28,8 @@ public interface FishermenMapper {
     @Mapping(target = "age", source = "request.age")
     @Mapping(target = "experience", source = "request.experience")
     @Mapping(target = "fullName", source = "request.fullName")
+    @Mapping(target = "passportSeries", source = "request.passportSeries")
+    @Mapping(target = "passportNumber", source = "request.passportNumber")
     @Mapping(target = "preferencesFishes", source = "fishesIds", qualifiedByName = "fishes")
     @Mapping(target = "distancesToLakes", source = "request.distances", qualifiedByName = "baseLakeMapper")
     Fishermen mapToEntity(FishermenRequestDto request, List<Long> fishesIds);
@@ -36,6 +38,8 @@ public interface FishermenMapper {
     @BeanMapping(ignoreByDefault = true)
     @Mapping(target = "id", expression = "java(String.valueOf(entity.getId()))")
     @Mapping(target = "fullName", source = "fullName")
+    @Mapping(target = "passportSeries", source = "passportSeries")
+    @Mapping(target = "passportNumber", source = "passportNumber")
     @Mapping(target = "age", source = "age")
     @Mapping(target = "experience", source = "experience")
     @Mapping(target ="preferencesFishes", source = "preferencesFishes", qualifiedByName = "fishReferenceBase")
@@ -60,6 +64,8 @@ public interface FishermenMapper {
     @Mapping(target = "preferencesFishes")
     @Mapping(target = "experience")
     @Mapping(target = "fullName")
+    @Mapping(target = "passportSeries")
+    @Mapping(target = "passportNumber")
     @Mapping(target = "distancesToLakes")
     void updateFishermen(Fishermen curFishermen, @MappingTarget Fishermen updFishermen);
 

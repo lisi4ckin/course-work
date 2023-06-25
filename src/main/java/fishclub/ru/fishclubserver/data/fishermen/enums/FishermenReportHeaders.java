@@ -10,7 +10,9 @@ public enum FishermenReportHeaders {
     NAME("ФИО", 1),
     AGE("Возраст", 2),
     EXPERIENCE("Опыт", 3),
-    PREFERENCES_FISHES("Предпочитаемые рыбы", 4);
+    PASSPORT_NUMBER("Номер паспорта", 4),
+    PASSPORT_SERIES("Серия паспорта", 5),
+    PREFERENCES_FISHES("Предпочитаемые рыбы", 6);
 
     private final String columnName;
     private final Integer columnIndex;

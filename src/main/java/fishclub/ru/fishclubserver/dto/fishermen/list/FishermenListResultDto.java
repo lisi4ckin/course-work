@@ -11,4 +11,6 @@ public class FishermenListResultDto {
     private String fishermenFullName;
     private Long age;
     private Long experience;
+    private String passportSeries;
+    private String passportNumber;
 }
